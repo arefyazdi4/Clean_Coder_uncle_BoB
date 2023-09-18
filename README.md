@@ -25,9 +25,8 @@ and python examples to make it more understandably
 
 **Few important notes about it:**
 
-1. It's derived from many years of experience & many Django projects, both big & small.
+1. It's derived from many years of experience & many Fastapi projects, both big & small.
 2. It's pragmatic. All things mentioned here are things tested in production.
-3. It's opinionated. This is how we build applications with Django.
 
 **SomeThing important that I forgot**
 
@@ -59,60 +58,11 @@ and python examples to make it more understandably
 7. extract till you drp
 **Before**
 ```python
-def add_user(user_info: dict, current_user: User):
-    created_by = str(current_user.id)
-    new_user = User(**user_info)
-    new_user.created_by = created_by
-    new_user.created_date = datetime.utcnow()
-    new_user.password = mongodb_utils.make_password(user_info.get('password', None))
-    new_user.parents += current_user.parents
-    new_user.parents.append(created_by)
-    new_user.save()
-    current_user.children.append(str(new_user.id))
-    current_user.save()
-    if current_user.parents:
-        p_users = find_users_by_ids(current_user.parents, need_deleted_users=True)
-        for p_user in p_users:
-            p_user.children.append(str(new_user.id))
-            p_user.save()
-    return new_user.id
+
 ```
 **After**
 ```python
-class CreateUser:
-    def __init__(self, input_user: UserIn, current_user: User):
-        self.input_user = input_user
-        self.new_user: User = User(**jsonable_encoder(input_user))
-        self.current_user: User = current_user
 
-    def add_user(self):
-        self.__annotate_new_user_meta_data()
-        self.new_user.save()
-        self.__add_children_user_id_to_parents_users()
-        return self.new_user.id
-
-    def __annotate_new_user_meta_data(self):
-        self.new_user.created_date = datetime.utcnow()
-        self.new_user.password = mongodb_utils.get_password_hash(self.input_user.password)
-        self.__add_parents_users_id_to_new_user()
-
-    def __add_parents_users_id_to_new_user(self):
-        created_by = str(self.current_user.id)
-        self.new_user.created_by = created_by
-        self.new_user.parents += self.current_user.parents
-        self.new_user.parents.append(created_by)
-
-    def __add_children_user_id_to_parents_users(self):
-        self.current_user.children.append(str(self.new_user.id))
-        self.current_user.save()
-        if self.current_user.parents:
-            self.__add_children_user_id_to_current_user_parents()
-
-    def __add_children_user_id_to_current_user_parents(self):
-        p_users = find_users_by_ids(self.current_user.parents, need_deleted_users=True)
-        for p_user in p_users:
-            p_user.children.append(str(self.new_user.id))
-            p_user.save()
 ```
 
 ## Function Structure
@@ -127,24 +77,115 @@ class CreateUser:
 4. innes not outies
    - never use output as an argument, arguments should go into the function not coming out
 
-```python
-result = []
-def add_data_to_list(arg: any, result:  list()):
-    result.append(arg)
-print(result)
-```
-
-
 5. the null defence
-   - passing a null to a function or writing a function that expect a null to be passed in
-   - is almost as bas as passing a boolian into the function
-   - actually it's worse cuz it's not abuse taht it's two possible state 
-   - write two function one that take null an onother that don't
-   - don't use null as a sudo boolian
-   
+   - passing a null to a function or writing a function that expects a null to be passed in
+   - it is almost as bas as passing a boolean into the function
+   - actually, it's worse cuz it's not abuse that it's two possible states 
+   - write two functions one that take null the other that don't
+   - don't use null as a sudo boolean
+   - i don't like defensive programming i don't like to littering my code with null check and error check 
+   - I hate to think my teammates carelessly allowing null to slip throw to my functions 
+   - defensive coding means that you don't trust your team or your team unit test 
+   - if you are constantly checking your input arguments for nulls, that means that 
+   - your unit test is not preventing you from passing those nulls
+   - in public api code defensive but core written in my system by my team good offence by sweet test
+   - 
 6. the step-down rule
-    - public up - private down _ up importance—down detail
-7. it's better to do a suboptimal convention that confuses every body
+    - public methods up — private methods down 
+    -  importance up - detail down
+    - then you can take listing and then cut that listing between the public and private
+    - and handing the public part to users
+    - it's better to follow a suboptimal convention that confuses every body
+    - all the functions point down, not backward pointing
 
+### Switch Statements
+1. switch statements are a missed opportunity to use polymorphism
+2.  there is no rule, but generally we don't use it
+3. they are not OO
+   - the big benefit of OO is the ability to manage dependencies
+   - A -> B if there is module A has a function that calls the module B
+   - that s dependency from module A to module B
+   - that dependency it has two component (it's runtime dependency)
+   - the source code of module A is dependent on module B (like Import or using a method)
+   - what we want to deploy module aA and B sepratly. For example, a module B is a plugin to module A
+   - if module A is dependent on module B, they cannot be deployed separately, they can not be compiled separately
+   - OO allow us to revert that source code dependency. A (dependent)-> I(interface) <- B(drive)
+   - the source code dependency point's again's the flow of control, it opposes the flow of control
+   - module B can be plugged in module B
+   - each case in switch statements it's like to have a dependency outward on an external module
+   - when we face a switch statements, we can do two things
+     - invert a dependency with polymorphism 
+     - the other option is to move switch statements to somewhere that cannot make any harm
+     - to replace a switch with polymorphism 
+       - take the argument of switch which is some type code and replace it with abstract base class 
+       - that has a method that corresponds to the operation that been performed by the switch
+       - then each of the switch cases became a driven class implement the method that case did 
+       - where to implement this ?? in Factory
+   - in every application you write, you should draw a line through a module diagram that separates core application
+   - library from low-level detail 
+   - the application part where most application code lives 
+   - but on the main side, we have low-level stuf like factories, configuration data (the main program)
+   - application is usually subdivided in different submodules
+   - but the main part should be small and limited in subdivision
+   - the dependency between these two partitions should point in one direction and one direction only
+   - they should cross the line towards the application 
+   - the main partition should depend on application the application should not have no dependency backward towards main
+   - maine is plug in to the application
+4. Dependency injection
+   - the tricks to dependency injection carefully define and maintain your partitioning
+   - go ahead and use the framework but only inject a few entrypoint from main in to the rest of the application 
+   - and let min do the rest of work with factory and strategies
+   - if your application is composed in independently deployable plugins 
+   - then all of those plugins should know about core application and central core shouldn't know anything about plugins at all
+   - all the source code dependencies should point inward from the plugins towards the core 
+   - no software dependency should point outward way from the core towards plugins
+     - waht if plugins have plugin of their own
+     - in most well write application the line between application and plugin blurs 
 
-### Switch Case
+```
+         ┌───┐                    ┌───┐
+         │app│                    │app│
+         └─┬─┘                    └─┬─┘
+           │                        │
+     ┌─────▼─────┐            ┌─────▼──────┐
+     │   Switch  │            │ Base Class │
+     └─────┬─────┘            └─────▲──────┘
+           │                        │
+  ┌─────┬──┴──┬─────┐       ┌─────┬─┴───┬─────┐
+  │     │     │     │       │     │     │     │
+┌─▼─┐ ┌─▼─┐ ┌─▼─┐ ┌─▼─┐   ┌─┴─┐ ┌─┴─┐ ┌─┴─┐ ┌─┴─┐
+│   │ │   │ │   │ │   │   │   │ │   │ │   │ │   │
+└───┘ └───┘ └───┘ └───┘   └───┘ └───┘ └───┘ └───┘
+    other modules               Drivetive
+```       
+
+```
+                                              ────┐
+                 ┌┬────────────────────┬┐         │      ┌┬──────────────┬┐
+                 ││applicatio partition││         │      ││main partition││
+                 └┴────────────────────┴┘         │      └┴──────────────┴┘
+                                                  │
+                                                  │
+                                                  │
+              ┌───────┐                           │   ┌───────┐
+              │       │            ┌─────────┐    │   │factory│
+┌──────┐ ┌────►       ├───────────►│ factory │◄───┼───┤  imp  │◄───┐
+│      ├─┤    └──▲────┘            └─────────┘    │   └───────┘    │  ┌──────┐
+│      │ │       │                                │                ├──┤ main │
+└──────┘ │       │                                │                │  └──┬───┘
+         │  ┌────┴──┐                             │   ┌───────┐    │     │
+         └─►│       │              ┌─────────┐    │   │factory│    │     │
+            │       ├─────────────►│ factory │◄───┼───┤ imp   │◄───┘     │
+            └─┬───┬─┘              └─────────┘    │   └───────┘          │
+              │   │                               │                      │
+ ┌──────┐◄────┘   └────────────────────┐          │                      │
+ │      │                              │          │                      │
+ │      ├───►┌──────┐              ┌───▼──────┐   │                      │
+ └──────┘    │      ├─────────────►│          │◄──┼──────────────────────┘
+             │      │              └──────────┘   │
+             └──────┘                             │
+                                                  │
+                                                  │
+                                                  │
+                                                  └─────
+```
