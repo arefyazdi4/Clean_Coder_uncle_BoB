@@ -139,8 +139,17 @@ and python examples to make it more understandably
    - then all of those plugins should know about core application and central core shouldn't know anything about plugins at all
    - all the source code dependencies should point inward from the plugins towards the core 
    - no software dependency should point outward way from the core towards plugins
-     - waht if plugins have plugin of their own
-     - in most well write application the line between application and plugin blurs 
+     - what if plugins have plugin of their own
+     - in most well write application the line between application and plugin blurs
+   - the goal of all this partitioning is to create a system that is composed of independent deployable module
+   - lots of systems are not independently deployable most of the time we gather all the modules in a single file
+   - and ship it as a single unit, but that doesn't mean wee don't wane independently deployable 
+   - a system that is independently deployable is also independently developed 
+   - when we have a plugin structure, then a development team working on those plugable modules works independently 
+   - because the plugin structure makes it less likely to team inter fear with each other, on the other hand, a switch 
+   - that ruins this plugin struggle also runes the independent dependability
+5. a long chine of if else statements has the same problem that switch statements do  
+
 
 ```
          ┌───┐                    ┌───┐
@@ -189,3 +198,63 @@ and python examples to make it more understandably
                                                   │
                                                   └─────
 ```
+
+### Paradigms
+
+1. object-oriented programing
+2. structured programming
+3. functional programming
+   - what is functional programming? 
+     - you can't change the state of variables
+     - there are no side effects 
+   - functional programming seems radical at first if never look into it,
+   - I think you might be surprised;
+   - you may even wonder writing a program like this is even possible
+   - functional program tells us writing program without any assignments
+     - instead of setting a bunch of variables, you pass those variables as argument
+     - instead of looping over a set of variables, you recurse throw a set of function arguments
+   - you call a function that always returns the same value back when you give the same input
+   - the value of function only depends on its input arguments and not any other state of a system
+   - so every time you call that function with the same input, you get the exact same output 
+   - there is no side effect
+
+### side effects
+when a function changes a variable that out live a function call, for example,
+when it changes an n instance of variable, then that function has a side effect ,
+and that side effect may change the behavior of that function
+or some other function the next time that called 
+this kind of scary actions ,make program difficult to understand, and it is persistence source of errors
+
+1. often side effects come in pairs
+   - set get open close new delete
+   - the function should be called in order to open before close, new before delete 
+   - we call this temporal coupling
+   - when you depend on one thing happens before the other
+   - most of the time temporal compelling are hidden in the background
+     - you look at two functions that should be called in certain order, and you can't explain why
+   - can you eliminate temporal couplings 
+     - for example in open close
+     - you resolve the temporal coupling by passing a block
+     - you hide the second function inside the first 
+     - and then pass command into the first
+     - and first will do the open, execute a block and then close 
+     - this leaves the system in the same state it was before
+     - and eliminate the temporal coupling 
+     - this is a technics **passing a block**
+     - this guarantees that every thing stays consistent that functions are executed in the right order 
+     - and a limited side effect 
+     - 
+     - we can't get rid of every side effect, and we don't want to 
+     - we need to be able to change a file, we need to be able to update a databases
+     - we need to be able to generate oyt put
+     - all these things are side effects, and they are desirable side effects
+     - our goal is not to eliminate the side effects
+     - **our goal is to impose discipline upon where and how those side effects happen**
+```
+public voide open(file F, fileCommand)
+   f.open()
+   c.process(F)
+   f.close()
+
+```
+### Command Query Separation
