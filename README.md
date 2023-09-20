@@ -6,10 +6,10 @@
 **Table of contents:**
 
 - [What is this?](#what-is-this)
-- [Clean Code](#clean-code)
-- [Names](#names)
-- [Function](#function)
-- [Function Structure](#function-structure)
+- [Clean Code](#1clean-code)
+- [Names](#2names)
+- [Function](#3function)
+- [Function Structure](#4function-structure)
   * [Arguments](#arguments)
 
 
@@ -31,10 +31,10 @@ and python examples to make it more understandably
 **SomeThing important that I forgot**
 
 
-## Clean Code
+## 1.Clean Code
 
 
-## Names
+## 2.Names
 1. chose your name thoughtfully
 2. communicate your INTENT
 3. avoid disinformation
@@ -48,7 +48,7 @@ and python examples to make it more understandably
 
 
 
-## Function
+## 3.Function
 1. do 1 thing
 2. do it well
 3. do it only
@@ -65,7 +65,7 @@ and python examples to make it more understandably
 
 ```
 
-## Function Structure
+## 4.Function Structure
 
 ### Arguments
 1. **3** arguments **MAX**
@@ -258,3 +258,104 @@ public voide open(file F, fileCommand)
 
 ```
 ### Command Query Separation
+one very successful managing side effects is creating a strong separation between command and queries.
+in this contex a command changes the state of a system it hase aside effect, a query does not.
+a query returns a value of computation or state of a system,
+a command changes the state of the system and returns Nothing
+
+1. Functions that change State should not return Values
+2. Functions that return Values should not change State
+- advantages
+   - it's easy to recognize a function are or aren't having a side effect's
+
+let's look at this the other way around:
+```
+User u = authorizer.login(username, password)
+```
+looking at this call, clearly it changes the state of system 
+the authorizer created a new logged-in user, 
+but the authorized get back to you what are supposed to do 
+are you supposed to manage it, are you in the middle of big coupling
+you are the one who is supposed to call logout at some point, 
+don't you think the authorizer should keep control of user
+```
+User u = authorizer.getUser(userName)
+```
+why did the login function return to user
+maybe the loging return to user, so it can return a null if login fails.
+we are often tempted to return error code
+like this from our command if they fail to change state.
+but it's better to
+throw an exception maintaining a convention that commands returns a void.
+```
+old_blah=set_blah(new_blah)
+...
+set_blah(old_blah)
+```
+multiple threads complicate things ,
+image we got a function that changes the state of system but also returns a previous state
+so that we can save it and restore it later
+, we don't want to separate this in two call the same way command query separation ask us
+because we don't want a separate thread to sneak in between those two calls 
+but notice how similar it is to open and close problem, you can resolve it the same way by passing a block
+```
+with_blah(new_blah, some_blah_command)
+```
+so don't confuse your readers' command that return values should not change state
+and functions that change state can change state, but they should not return a value
+
+### Tell Don't Ask
+an extreme form of command query separation tells us to avoid queries altogether
+```
+if user.is_loged_in():
+    user.exec_command()
+else:
+    annuciator.promt_login()
+```
+wouldn't this be better if we use exception like this?
+```
+try:
+    user.exec(command)
+exec User.NotLoggedIn as e:
+    annunciator.promt_login()
+```
+and wouldn't that actually better if we let user object deal with a problem entirely?
+```
+user.exec(command, annunciator)
+```
+after all, it's a user object that knows whether it's logged-in or not
+that state belongs to a user object why we take that ste and make decisions 
+for the user here, we should let the user deal with the problem 
+ - you should be told the object's to do not just ask them
+ - query functions can get out of control really quickly
+
+
+```
+o.get_x()
+    o.get_y()
+        o.get_z()
+            .do_some_thing()
+```
+I am sure you have seen a long chaine of function like this,
+we call this train wrecks because it looks like boxed cars together  
+they are a clear violation of tell don't ask 
+because we ask to then ask before we tell anything
+```
+o.do_some_thing()
+```
+wouldn't this be better like this 
+now we get rid of problem we told O to do something and O's got to figure out how to get to the z
+o probably doesn't know where is z either, but o knows it s somebody that they can tell to figur it out
+so call do something will propagate out word to eventually get to z 
+
+train wracks the long chain of query break the law called the "law of demeter"
+this law tells us that it is a bad idea that single functions to know the entire navigation structure of system
+consider how much knowledge this line of code has, it knows that x has y and y has z and that z can do something
+ that determines the amount of knowledge for oneline of code to have, and it couples the function that contains it
+to too much of hole system
+we don't want our functions to know about hole system
+individual functions should have a very limited amount of knowledge,
+we don't wane a function to be able to walk the whole configuration database
+we don't wanna a function to be able when its way to the entire object map of entire system
+what we want to do it to tell our neighboring objects what we need to have done 
+and depend on them to propagate the massage to outward
