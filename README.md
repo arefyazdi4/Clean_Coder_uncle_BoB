@@ -436,3 +436,189 @@ on the other hand,also there is a small problem with returning from the middle o
 
 ***error handling is important, but if it obscures the logic, it is wrong***
 
+1. Errors Firs
+   - it's always best if you write your error handling code then write the rest of code
+   - that way you don't paint your self into an implementation that can't handle error
+2. Prefer Exceptions
+3. Exceptions are for callers
+    - I don't like reusing can exceptions from a language library
+    - when I threw an exception, I wanted to be scoped to the class that throw it
+    - and I wanted to be named as specific as possible
+4. Use Unchecked Exceptions
+   - in java drive your exception from runtime exception
+   - in python drives your exception from Base Exception
+5. How much massage should it have?
+    - not much
+    - I think the best case for exception is to not have a massage at all
+    - I like my error to be so persisted, so no massages are needed
+    - the best comments is the comment you don't have to write
+    - this is doesn't mean don't put massages im my exceptions
+      - sometimes there is a till little bit of information that is useful to pass along
+      - but I always want a name and scope of the exception to do the most of the work
+6. Spacial Cases
+    - it's possible someone might just construct a stack with zero sizes
+    - it's not error it's definition for zer size stack
+7. Null is not an error
+    - Top return a top value but what should it return if the stack is empty
+    - nobody expects to receive a null
+    - and unwanted null has a tendency to slip and slide throw the system
+    - until eventually, they cuz a null pointer exception
+    - so it thinks it's better to trow entirely new exception a stack empty exception
+8. Null is a value
+    - find is a method that searches the stack from top to bottom
+    - and return the first index that matches the input argument that is integer 
+    - what should it do if it doesn't find the argument?!
+    - we could throw an exception
+    - but that would be strainge
+    - because we expect a find to fail from time to time
+    - and we usually reserve an exception for things that are not expected
+    - what we need is vale that we can return in a find that means not found
+      - java convention is to return -1 but -1 is still an integer 
+      - it might get used at a computation 
+      - I think it's better to return null 
+      - null is a value that means nothing 
+      - -1 is not nothing
+9. trying is a one thing
+    - if "try" appears in a function, it must be a very first word world of function after any variable declaration
+    - body of try block must contain a single line a function call
+    - and the close and finally line the last thing the function nothing follows them
+    - a function supposed to do one thing and error handling is one thing
+    - a function should either do something or hande errors
+    - but it shouldn't do both 
+
+```python
+import pytest
+
+
+class Stack:
+    def __init__(self, capacity: int):
+        self.size = 0
+        if capacity >= 0:
+            self.capacity = capacity
+        else:
+            raise Stack.IllegalCapacity()
+        self.elements = [None for _ in range(self.capacity)]
+
+    def is_empty(self):
+        return self.size == 0
+
+    def get_size(self):
+        return self.size
+
+    def top(self):
+        if self.is_empty():
+            raise Stack.Empty()
+        return self.elements[self.size - 1]
+
+    def push(self, element):
+        if self.size == self.capacity:
+            raise Stack.Overflow()
+        self.elements[self.size] = element
+        self.size += 1
+
+    def pop(self):
+        if self.is_empty():
+            raise Stack.Underflow()
+        self.size -= 1
+        return self.elements[self.size]
+
+    def find(self, element):
+        for i, e in enumerate(self.elements[::-1]):
+            if element == e:
+                return i
+        return None
+
+    class Overflow(Exception):
+        ...
+
+    class Underflow(Exception):
+        ...
+
+    class IllegalCapacity(Exception):
+        ...
+
+    class Empty(Exception):
+        ...
+
+
+@pytest.fixture(scope="function")
+def stack():
+    stack: Stack = Stack(2)
+    yield stack
+
+
+class TestStack:
+
+    def test_if_newly_created_stack_is_empty(self, stack):
+        assert stack.is_empty() is True
+        assert stack.get_size() == 0
+
+    def test_after_one_push_stack_size_should_be_one(self, stack):
+        stack.push(1)
+        assert stack.get_size() == 1
+        assert stack.is_empty() is False
+
+    def test_after_one_push_and_one_pop_stack_should_be_empty(self, stack):
+        stack.push(1)
+        stack.pop()
+        assert stack.get_size() == 0
+
+    def test_when_pushed_past_limit_stack_over_flow(self, stack):
+        stack.push(1)
+        stack.push(1)
+        try:
+            stack.push(1)
+        except Stack.Overflow:
+            ...
+        else:
+            assert 1 == 0
+
+    def test_when_empty_stack_is_popped_show_throw_under_flow(self, stack):
+        try:
+            stack.pop()
+        except Stack.Underflow:
+            ...
+        else:
+            assert 1 == 0
+
+    def test_when_one_is_pushed_one_is_popped(self, stack):
+        stack.push(1)
+        assert stack.pop() == 1
+
+    def test_when_one_two_is_pushed_two_one_is_popped(self, stack):
+        stack.push(1)
+        stack.push(2)
+        assert stack.pop() == 2
+        assert stack.pop() == 1
+
+    def test_when_create_a_stack_with_negative_size_throw_illegal_capacity(self):
+        try:
+            stack: Stack = Stack(-1)
+        except Stack.IllegalCapacity:
+            ...
+        else:
+            assert 1 == 0
+
+    def test_when_one_is_pushed_one_is_top(self, stack):
+        stack.push(1)
+        assert stack.top() == 1
+
+    def test_when_stack_is_empty_top_throws_empty(self, stack):
+        try:
+            stack.top()
+        except stack.Empty:
+            ...
+        else:
+            assert 1 == 0
+
+    def test_give_stack_with_one_two_pushed_find_one_two(self, stack):
+        stack.push(1)
+        stack.push(2)
+        assert stack.find(1) == 1
+        assert stack.find(2) == 0
+
+    def test_give_stack_with_no_two_find_two_should_null(self, stack):
+        stack.push(1)
+        assert stack.find(2) is None
+
+```
