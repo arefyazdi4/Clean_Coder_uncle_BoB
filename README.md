@@ -11,7 +11,14 @@
 - [Function](#3function)
 - [Function Structure](#4function-structure)
   * [Arguments](#arguments)
-
+  * [Switch Statements](#switch-statements)
+  * [Paradigms](#paradigms)
+  * [Side Effects](#side-effects)
+  * [Command and Query Separation](#command-query-separation)
+  * [Tell Don't Ask](#tell-dont-ask)
+  * [Early Returns](#early-returns)
+  * [Error Handling](#error-handling)
+- [Form](#5form)
 
 ---
 
@@ -486,7 +493,7 @@ on the other hand,also there is a small problem with returning from the middle o
     - a function should either do something or hande errors
     - but it shouldn't do both 
 
-```python
+```
 import pytest
 
 
@@ -622,3 +629,100 @@ class TestStack:
         assert stack.find(2) is None
 
 ```
+
+## 5.Form
+
+### comments
+### coding standards
+1. every team should have a coding standard
+2. coding standard shouldn't be written in a separated document
+3. it should be clearly visible inside a code itself
+4. when we comment on every thing, it cuz us to ignore them
+5. comments should be **rare**
+6. comments should be reserved for spacial cases when programmers' attention is really needed
+7. and every programmer that reads them should be grateful and releave
+8. [The Elements of Programming Style](*https://www.amazon.com/Elements-Programming-Style-2nd/dp/0070342075)
+  - **documentation chapter 8**
+  - the best document for a program is a clean structure
+  - it also helps if the code is well formatted, with good mnemonic identifiers and labels (if any are needed)
+  - and smattering of enlightening comments. Flow charts and program descriptions are secondary importance;
+  - the only reliable documentation of a computer program is the code itself
+  - the reason is simple whenever there are multiple presentations of a program 
+  - the change for discrepancy exists
+  - if the code is in error, artistic flow charts and detailed comments are to no avail
+  - only by reading the code can the programmer know for sure what the program does
+### comments are failure 
+1. it should be the goal of every programmer to
+2. write code that expresses its intense so well that it doesn't need comments
+3. modern languages are remarkably expressive
+4. we have a bunch of interesting syntax elements that we can use
+   - classes, nested classes, namespace, enums, limitless names
+5. every comment you write is failure to express your self well in code
+### Comments are liar
+1. it's very difficult for comment to remind trustfully for a length of time
+2. over time comments degrade into disinformation 
+3. comments don't rat because of lazy programmers
+4. comments rat because they tent to be none local
+### Good comments
+1. not all comments are bas sometimes comments can be useful sometime they become required
+2. legal comments
+3. informative comments
+   - for example, comments that explain some horrible regular expiration
+4. clarifications ande explanation of intent
+   - when you must write a comment to explain your intent, you failed 
+     - of course, in those situation best is to not leave a code unexplained 
+5. warnings of a consequence 
+6. TODO comments
+   - LOL XD
+7. public api documentation 
+   - best api documentation is the documentation that you don't have to write
+### Bad comments
+1. Mumbling
+   - don't talk to your self in the comment of code
+     - don't write about the lyrics of the song you are listening to ot your life situation
+     - or they write a system bad way
+2. Redundant explanation
+   - make sure when write comment add something new
+   - DRY don't repeat your self
+3. Mandated Redundancy
+   - if you see a comment that is wrong or miss leading, either fix it or remove it
+4. jornal comments
+   - you have source code control then use it
+5. Big banner comments
+   - position markers and big banner comments 
+   - it is a great way to make sure that the world inside it never read
+   - nothing shout ignore me more than a big banner comment
+6. closing brace comments
+7. Attribution comments
+8. HTML in Comments
+9. None Local Information
+   - comments that talk about part of code that are far away wit rat a rat quickly
+10. Commented Code (immediately remove it)
+### Explanatory Structure
+1. rater than use comments to describe what code dose learns how to use explanatory variables and names
+### Formatting
+1. White-space discipline is importance
+2. white-space care's information
+3. we should use it with the same level of care as any other structure in our source code 
+4. when someone first looks at our code, we want them to be impressed by the attention to detail
+5. stricken by how order is it convinced by professional at work
+6. the very first think they see at our code is formatting
+7. formatting is about communication, and communication is the first order of business for every other programmer
+8. **getting your code to communicate is even more important to getting your code to work
+### File Size
+1. project size and file size are not related to each other
+2. file length and project size are not related
+3. perhaps file size is correlated to project size
+4. we all have seen large files that become dumping ground for stuf that we haven't taken in the time to organize properly
+5. as every think in software smaller is better
+6. **keep your file sizes small**
+### Vertical Formatting
+1. use blink lines to separate things that should be separated like methods 
+2. be disciplined in your use of blank spaces
+3. decide how many lines should be used to separate method from each other and stick to that decision
+4. personally i sue 1 one between methods
+5. 1 line to separate methods from variables 
+6. if there is more than one kind of variables like public const and private, I use blank line between them too
+7. inside a function I will use a blank line to separate variable decoration from the rest of executable code 
+8. I put blank line between statements and while loops separating them from code follows 
+9. of course, if you keep your functions small, you don't need them as much
