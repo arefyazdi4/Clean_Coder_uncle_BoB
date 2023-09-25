@@ -726,3 +726,17 @@ class TestStack:
 7. inside a function I will use a blank line to separate variable decoration from the rest of executable code 
 8. I put blank line between statements and while loops separating them from code follows 
 9. of course, if you keep your functions small, you don't need them as much
+10. variables that have infinity for each other should be grouped together
+11. if the variables are used together, group them together without blank line
+12. things that are related to each other should be vertically closed to each other
+13. the distance between then shows how closely related to each either they are 
+14. things were not related to each other should be vertically apart
+### Horizontal Formatting
+how long should the line of code be?
+1. you are never to scroll write to see
+2. we don't like lines that are longer than 80 character
+3. lines should be less than 100-120 lines
+### Indentation
+the code that came out-of-team should look like team wrote it,
+I should be able to tell who wrote the code 
+### Classes
