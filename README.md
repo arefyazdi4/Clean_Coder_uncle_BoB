@@ -740,3 +740,77 @@ how long should the line of code be?
 the code that came out-of-team should look like team wrote it,
 I should be able to tell who wrote the code 
 ### Classes
+what is a class ?!
+you write class by writing a private variables
+then you manipulate those variables by public functions
+so from outside looking in class looks to have no variables at all, 
+just a bag of functions
+so from outside looking in class has no variables
+since an object is an instance of a variable ,it's also true that the object appears to have no variables
+to say this difficulty, from outside looking in an object have no observable state.
+object to this observation ,by pointing out most classes have getters and setters
+or in some languages mutable properties, 
+so let me respond to this objection
+if you take private variables of your class and expose them throw getters and setters , then you got a bad design
+after all why you should make your variables private and then just expose them throw a setters and getters
+remember the discipline of tell dont ask 
+if a object has no observable state, also its easy to the object to do something 
+it doesn't make lots of sense to ask any thing 
+object that follows tell dont ask doesnt have much of getters 
+and if doesn't have many getters there is not much point in have any setter either 
+method of class manipulate variable of class 
+the more variables that a class method manipulate the more cohesive that method is
+a maximally cohesive method manipuldate every variable in the class 
+a maximally cohesive class is composed of nothing, both maximally cohesive method 
+getters and setters are not very cohesive because they only manipulate single variable each 
+the more getters and setter a class has the less cohesive a class is,
+so that doesn't mean the class shouldn't have getters and setters?
+dog matter rules like this sell them apply in engineering discipline
+I personally write setters and getters from time to time,  
+but I try to minimize them because I try to maximize cohesion
+in those instances that is chose to have getter I don't simply expose a variable
+
+I try to abstract the information been retrieved 
+let me show you what is mean 
+```
+class Car:
+    galone_of_gas: int
+```
+what should we call getter?
+```
+class Car:
+    galone_of_gas: int
+    def get_gallon_of_gas:
+        return self.galone_of_gas
+```
+that expose an awful amount of information of implementation in our class 
+user from class can inform that there is a variable that holds the gallon of gas
+there is a number of problems for being specefic
+```
+class Diesele(Car):
+    def get_gallon_of_gas
+    
+```
+let's say we wanted to derivative a car diesel car
+of course it will inherent method get gallon of gas 
+but that is not quit write a disease car don't run on gasolin
+```
+class ElectricCar(Car):
+    def get_gallon_of_gas
+```
+we have method get gallon of gas in a base that derivative of electric car just dosn't fit 
+when derivative doesn't fit with a base, something is wrong with a base
+often because base exposes some implementation that shouldn't have,
+for example, instead of creating a gallon of gas,  
+we could use method get percent fueling
+```
+class Car:
+    def get_percent_fuling():
+        ...
+```
+this method will work just as fine as an electric car or diesel car 
+can you smell polymorphism coming 
+that's advantage of hiding your implementation, 
+the less implementation you expose, the more uppercutting you have to make polymorphism 
+that class with get gasoline method could not be polymorphism to an electric car and nuclear car
+- poly
