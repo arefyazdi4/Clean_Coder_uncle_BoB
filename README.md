@@ -774,14 +774,14 @@ I try to abstract the information been retrieved
 let me show you what is mean 
 ```
 class Car:
-    galone_of_gas: int
+    __galone_of_gas: int
 ```
 what should we call getter?
 ```
 class Car:
-    galone_of_gas: int
+    __galone_of_gas: int
     def get_gallon_of_gas:
-        return self.galone_of_gas
+        return self.__galone_of_gas
 ```
 that expose an awful amount of information of implementation in our class 
 user from class can inform that there is a variable that holds the gallon of gas
@@ -813,4 +813,123 @@ can you smell polymorphism coming
 that's advantage of hiding your implementation, 
 the less implementation you expose, the more uppercutting you have to make polymorphism 
 that class with get gasoline method could not be polymorphism to an electric car and nuclear car
-- poly
+
+ polymorphism is a key to independently deploy ability and plugin structure
+
+polymorphism allows us to protect client code like a car driver from changes to implementation of server code
+
+like car, it's pretty easy to write a car driver that can ride any derivative car without knowing or caring what that derivative is
+from outside looking in class is nothing but a set of methods, those methods may operate on a data,
+but you know nothing about how that data is implemented
+these methods are not setters and getters they hide the data they don't expose it 
+if they must expose some data they do in the most abstract way possible
+```
+                     ┌───────────────────────┐
+┌────────────┐       │  Car                  │
+│            │       ├───────────────────────┤
+│ Car Driver ├─────► │ - galon_of_gas        │
+│            │       ├───────────────────────┤
+└────────────┘       │ + get_percent_fuel()  │
+                     └───────────▲───────────┘
+                                 ▲
+                                 │
+                  ┌──────────────┴────────────┐
+                  │                           │
+          ┌───────┴────────┐         ┌────────┴──────┐
+          │                │         │               │
+          │  Electric Car  │         │  Nuclier Car  │
+          │                │         │               │
+          └────────────────┘         └───────────────┘
+```
+maybe you are wondering about class employe
+that clearly has methods like get name and get address that expose data within them
+what do you think different between class and data structure
+
+### Data Structure
+
+data structure is an opposite of a class, data structure has a hole bunch of data variables that are public and vitually no functions
+
+```
+class DataStructure
+    valiables: any
+```
+classes have a private method but public method 
+data structure has a public method but no variables
+
+data methods can have methods but typically are simple methods like getters or setters or little navigation aids
+the method of data structure manipulate individual variables
+they don't manipulate cohesive of groups of variables the way of methods of class do
+the method of data structure expose implementation they don't hide it they don't abstract it
+
+you can't tell data structure to do anything all you can do is to ask a question
+
+the software that manipulates data structure is the anti scent of tell don't ask
+
+dou can tell an object to do something generic like print itself on a screen,
+and it will do it automatically do a thing appropriate to it type it will polymorphic dispatch to appropriate  method,
+but you can't ask a data structure to do anything generic, 
+the only thing that you can do to ask it very specific question 
+if you want to print an on a data structure on screen then you have to ask for its type then this patch to approprite function your self
+probably with a with statement
+and so fata structure and switch statements are related in the same way that class to polymorphism related
+datastructure and switch statements offer protection same way the objects do they area is different type op protection
+
+***object protects you from new type***
+
+switch state magnets expose us to changes in type
+when a new type is ever added,all the switch statements have to be modified
+and all the client code is impacted by breaking independent deploy ability
+but objects are not immune to all type of changes , 
+ what happened when you add a method to base class 
+when you do that all the clients of the basement are effected and all the derivatives of base class are effected
+the all have to be recompiled and redeployed
+when you add a method to a baseclass you break in dependent deploy ability
+```
+def print_employe(e: Employe):
+    if e.type == Hourly:
+        print_hourly_employe(e)
+    if e.type == Salaried:
+        print_salary_employe(e)
+```
+data structure and switch statements on the other hand are immune to the new function 
+when you add new function all you need is to add new switch 
+```
+def delete_employe(e: Employe):
+    if e.type == Hourly:
+        delete_hourly_employe(e)
+    if e.type == Salaried:
+        delete_salary_employe(e)
+```
+
+for example, I have a set of data structures that represent a set of shapes
+(Circle, Square, Triangle, Rectangle)
+and let's also say I have a set of functions that operate on those data structures by taking a list of them
+so I got function draw all shapes that iterate throw a list of shapes and draw them all,  
+we got a noting function call erase all shapes and rotate and ...
+if you look inside all those functions, there is switch state statements selection among all of them
+```
+               ┌──────►
+┌──────┐       │        ┌───────┐
+│ draw ├────┬──┼───────►│Circle │
+└──────┘    ├──┼───┼──► └───────┘
+            │  │   │
+┌────────┐  │  ├──►│    ┌───────┐
+│ delete ├──┤  │   ├───►│Square │
+└────────┘  ├──┼───┼──► └───────┘
+            │  │   │
+┌────────┐  │  ├───►    ┌─────────┐
+│ rotate ├──┼──┤   ┌───►│Rectangle│
+└────────┘  ├──┼───┼──► └─────────┘
+            │  │   │
+            │  │   │    ┌────────┐
+            │  │   ├───►│Triangle│
+            └──┼───┴──► └────────┘
+               │
+               └───────►
+```
+if we add a new function to rotate all shapes, of course, you expect to have a switch statements,
+but it wouldn't have an effect on any existing adata structure
+**So adding a new function to data structure in switch statements does not break independent deploy ability**
+
+- classes protect us from a new type but expose us to new method
+- data structures protect us against new method but expose us to a new type
