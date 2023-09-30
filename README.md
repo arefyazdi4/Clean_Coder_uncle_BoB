@@ -933,3 +933,29 @@ but it wouldn't have an effect on any existing adata structure
 
 - classes protect us from a new type but expose us to new method
 - data structures protect us against new method but expose us to a new type
+
+### Boundaries
+1. separate main from the rest of the application
+2. split things is two partitions with main one side and the application on the other 
+3. all the source code dependencies should cross that boundary in going in one direction away from main toward the application
+4. this makes a main a plug to the rest of the application
+5. app is a crisscross, other boundaries are views/models, database/domain object
+6. for each boundary, one side is concreate, one side is abstract
+7. for example, main is concreate the rest of the app is abstract from a main point of view 
+8. source code dependency point from concrete to abstract C -> A , database -> Domain object
+9. database depend on domain but domain does not depend on database
+10. Application, Domain <- database interface layer (orm) -> Database
+11. oo invert dependency not dataflow that means application can still call database layer, although it doesn't know database layer exist
+
+### The Impedance Mismatch
+1. data structure mappers are tool for taking datastructure from db and moving it to memory
+2. when you get a bunch of business rules into a domain object, then you get classes that don't look every much like a database table or schema
+3. specific application may desier different schema
+4. on the application side of the boundary we can separate owr self from schema by actually designing objects we like to use
+5. this would be a true object with exposed methods and hidden data
+6. rather than manipulating table rows, we manipulate business objects
+7. it's the responsibility of the database layer to convert back and ford between datastructure that lives in database and business object that the application wants to use
+8. that means on the application side of boundaries we would like to set of interface that declare data access s method
+9. we like to user business objects use those interfaces to access data they need
+10. one other side of the boundary we like a set of classes that drives from those interfaces and impliment data access by integrating data structures that have been fetched from a database
+11. we can use orm tool to fetch those datastructure out of a database
