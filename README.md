@@ -950,7 +950,7 @@ but it wouldn't have an effect on any existing adata structure
 ### The Impedance Mismatch
 1. data structure mappers are tool for taking datastructure from db and moving it to memory
 2. when you get a bunch of business rules into a domain object, then you get classes that don't look every much like a database table or schema
-3. specific application may desier different schema
+3. specific application may desire different schema
 4. on the application side of the boundary we can separate owr self from schema by actually designing objects we like to use
 5. this would be a true object with exposed methods and hidden data
 6. rather than manipulating table rows, we manipulate business objects
@@ -959,3 +959,107 @@ but it wouldn't have an effect on any existing adata structure
 9. we like to user business objects use those interfaces to access data they need
 10. one other side of the boundary we like a set of classes that drives from those interfaces and impliment data access by integrating data structures that have been fetched from a database
 11. we can use orm tool to fetch those datastructure out of a database
+
+## 6.Test Driven Development Part A
+
+### Fear and Code Rot 
+1. every code gets rot after a while into chaos
+2. we don't clean it because we scare to break it
+3. because you know if you touch it, you break it, and if you break it will become yours
+
+### Eliminating Fear
+
+### Demonstration
+Test eliminates the fear of cleaning a code
+
+### The Real World
+maybe you are thinking this is all in well and good for an open source where all the developers work for Free, 
+but in a real world the sweet of test like this it just is too expensive and time-consuming to create
+1. test saves a massive amount of time, and they have been here from day one
+2. we can develop it faster and safer than any project
+3. there are few defects we debug less, we code faster, we code better
+
+### *****The Three Laws of TDD*****
+test-driven development is a discipline, 
+and as a discipline it has a set of rules abandoning those rules and write a test when ever you feel like it 
+is not disiple and does not make you a test-driven discipline
+
+1. ***write No production code except to pass a failing test***
+2. ***write only Enough of a test to demonstrate a failure***
+3. ***write only Enough production code to pass the test***
+
+### Debugging time
+imagen a group of developers following these three laws no matter who no matter when sometime in last mint or so
+ everything they worked on is executed and pass 
+- increase in productivity must lead to less debugging skill
+
+### Design Documents
+have you ever integrated third party package , somehow another gave you a nice zip file when you pack it 
+you all the software you may also get a pdf, it would be a please manual written by tech rider 
+at the end of that manuel there is a ugly section of appendixes where all the code examples are
+where do you go first
+you go to code example because you want to see the trues
+you want to go to code ande see what really is going on 
+
+those unit tests you are writing are a code example fore hole system.
+
+you want to create an object there is a unit test that creates that object every why that can be created
+you want to know how to call some api there are some unite tests that call all the unit every way that its possible
+test are low level design documents they remain in language that you understand their author unambiguous
+they are so formal that they execute, and they can't get out of sync without execute application
+
+the cost of documentation is always high, and the reliability has been wolfy an adequate
+
+### Decoupling
+when you write your test code first, you have to design a production code to be accessible from the test
+
+since you have not written that production code yet test has tremendous influence on the design of production code yet
+and that influences make a production code test able
+
+- writing test first makes production code testable
+
+another word for testable is decoupled
+shortly it will help to have better design
+
+### courage to chane
+the test stops the code from roting
+
+why design and architecture considered to be so important 
+it's because we want the structure of the system to be
+1. flexable 
+2. maintainable 
+3. scalable
+
+when we add new feature, we want to make sure that the structure of the system is flexable enough to allow
+those changes without breaking every thing, but nothing makes a system more flexable than sweet of test
+because that test eliminates the test
+a perfectly designed system with no test you are afraid to clean it and improve it 
+
+***if you wanna a flexable system, get a flexable system that you trust
+
+### Trust
+I want you
+to think of testing a purchase that you want to use to jump out of airplane that how much you need to trust them
+
+so how do you get a swit of test that you trust with your life?'
+follow the three laws
+
+if you write your test after a facts then you never trust that test you always worried that there is a hole in it
+this is because testing after a facts is boring you already know that work because you test it manually
+writing a test after facts is a residual milestone it's not a necessary part of your code to work,
+so it feels like west and that means that you have gone take shortcut with your purchase
+there are some portions of code that are difficult to write at for , you test them manually so know them work
+therefore you don't feel it to write a unit test
+and so your test sweet has hole
+
+### Conclusion
+those three laws of TDD may have sounded pretty foolish at first, but nothing has  more profound 
+on the way software works since the invention of screen editor, 
+those three laws change the way you work on mint by mint bases
+and that change result in much less debugging ,reliable low level documentation decoupled design 
+and the courage to change and clean code.
+nothing I have found more reliably prevented and reversed code rot
+than the three laws of test driven develop ment
+
+
+
