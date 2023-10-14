@@ -1062,4 +1062,94 @@ nothing I have found more reliably prevented and reversed code rot
 than the three laws of test driven develop ment
 
 
+## 6.Test Driven Development Part B
+
+### Red, Green, Refactor
+#### Bowling game
+```
+import pytest
+
+
+class Game:
+    def __init__(self):
+        self.__rolls: list[int] = list()
+
+    def roll(self, pins: int) -> None:
+        self.__rolls.append(pins)
+
+    def score(self) -> int:
+        score: int = 0
+        first_in_frame = 0
+        for frame in range(10):
+            if self.__is_strike(first_in_frame):
+                score += 10 + self.__next_two_ball_for_strike(first_in_frame)
+                first_in_frame += 1
+            elif self.__is_spare(first_in_frame):  # spare
+                score += 10 + self.__next_ball_for_spare(first_in_frame)
+                first_in_frame += 2
+            else:
+                score += self.__two_ball_in_frame(first_in_frame)
+                first_in_frame += 2
+        return score
+
+    def __two_ball_in_frame(self, first_in_frame):
+        return self.__rolls[first_in_frame] + self.__rolls[first_in_frame + 1]
+
+    def __next_ball_for_spare(self, first_in_frame):
+        return self.__rolls[first_in_frame + 2]
+
+    def __next_two_ball_for_strike(self, first_in_frame):
+        return self.__rolls[first_in_frame + 1] + self.__rolls[first_in_frame + 2]
+
+    def __is_spare(self, first_in_frame) -> bool:
+        return self.__rolls[first_in_frame] + self.__rolls[first_in_frame + 1] == 10
+
+    def __is_strike(self, first_in_frame) -> bool:
+        return self.__rolls[first_in_frame] == 10
+
+
+@pytest.fixture(scope="function")
+def g() -> Game:
+    g: Game = Game()
+    yield g
+
+
+class TestBowling:
+
+    def roll_many(self, n: int, pins: int, game):
+        for _ in range(n):
+            game.roll(pins)
+
+    def roll_spare(self, g):
+        g.roll(5)
+        g.roll(5)
+
+    def roll_strike(self, g):
+        g.roll(10)
+
+    def test_gutter_game(self, g):
+        self.roll_many(20, 0, g)
+        assert g.score() == 0
+
+    def test_all_ones(self, g):
+        self.roll_many(20, 1, g)
+        assert g.score() == 20
+
+    def test_one_spare(self, g):
+        self.roll_spare(g)
+        g.roll(3)
+        self.roll_many(17, 0, g)
+        assert g.score() == 16
+
+    def test_one_strike(self, g):
+        self.roll_strike(g)
+        g.roll(3)
+        g.roll(4)
+        self.roll_many(16, 0, g)
+        assert g.score() == 24
+
+    def test_perfect_game(self, g):
+        self.roll_many(12, 10, g)
+        assert g.score() == 300
+```
 
