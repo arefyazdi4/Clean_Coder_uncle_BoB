@@ -19,7 +19,15 @@
   * [Early Returns](#early-returns)
   * [Error Handling](#error-handling)
 - [Form](#5form)
-
+    * [Comments](#comments)
+    * [Structure](#formatting)
+    * [Classes](#classes)
+    * [Data Structure](#data-structure)
+    * [Boundaries](#boundaries)
+- [TDD](#6test-driven-development-part-a)
+    * [The Three Laws of TDD](#the-three-laws-of-tdd)
+    * [Red, Green, Refactor](#red-green-refactor)
+    * [Objections](#objections)
 ---
 
 ## What is this?
