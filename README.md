@@ -1152,4 +1152,77 @@ class TestBowling:
         self.roll_many(12, 10, g)
         assert g.score() == 300
 ```
+- when you write a real code, you write the simplest real code
+
+### Objections
+1. test is code by following tdd you write much more code than normal, then it must slow you down?
+    - tdd makes you drive fast, first of all you spend less lot time debugging
+    - tdd allows you to clean your code so don't need constantly dealing with every body mass
+2. there are managers who either throw ignorance or disagreements they never allow their programmers to practice tdd?
+    - but why have your boss should to know
+    - do you ask your boss to use semicolon or indent if statement 
+    - when is the last time your asked your boss if you can go to the bathroom?
+    - tdd is personal practice permission is not required
+3. still they will object!!!
+    - tell him you are doing it in order to go faster
+    - if he objects tell him, you have to double all you estimate
+    - if he objects more, tell him mining his own business
+    - after all, you are a software developer
+4. is that refactor rework isn't better to write code current the first time?
+    - every created on a planet is iterative
+    - programmers don't write prefect code first time either
+5. who test the tests?
+    - we have to stream of code the test and the production code 
+    - and the test, tests the production code
+    - but the production code tests the tests
+6. a single change in production code can cause many hundreds of tests to break, perhaps maintaining all those tests is to expensive
+    - if only they are poorly designed
+    - design your test well and if you discover better design refactor your test
+    - tests are as important as prediction code even they are more important
+    - thread them the same way you thread your production don't allow them to be mass
+    - if a single change in production causes a hole bunch of tests to break, your test is to couple to production
+    - so find a way like abstraction or some other way to decouple your test
+7.  test can prove the presence of a bug but cannot prove the absence of a bug 
+    - our goal is to create purchase to eliminate the fear of change we will never achieve 100% certainty, but 99 is pretty damn good
+8. to gain sweet of test, it is tested that matter not when we write them
+    - if you write your test at the end, they are not going to be complete
+    - humans consider things that come first to be more important
+    - whe n you write those tests first you trust those tests
+    - test is important than production because that makes production flexable
+    - without the test production code rot
+    - 
+9. there is a vast amount of code, and it does not have test what we do about that
+    - (working effectively with legacy code, michel feather) define legacy as a code without test
+    - it is hard to get legacy code tested because it is not designed to be testable
+    - in order to test, you have to make a series of small decoupling design changes
+    - but without the test, you have no way to tell if your design breaks it every thing
+    - in order to test, you must refactor but without test you cannot refactor
+    
+    - find some small par ot legacy code that you can test without making big changes
+    - then use those tests to extend the design changes more safely
+    - I don't trust big refactoring or test projects
+    - instead, I waited till a new feature was needed in some part of legacy code 
+    - and then will change a little bit of design and add a few tests in the effected area
+    - month by month, year by year, slow and gradual prices will eventually spread test throughout the bulk of legacy code
+    - there is some part of legacy that you never get tested, but an important part will get tested 
+    - and also all new code you write test first
+    - and in this situation that you have the option either to modify older code or write a new module write new module so can write it test fist
+    - always prefer test first
+10. how then do you test databases 
+    - you don't, databases are black boxes that you usually do not test
+    - what you usually test is that your schema and quires work as planned 
+    - the first step is to separate the application from the database using the layering technique 
+    - then you can test the database independently of the application
+    - you can test generated query behave properly by loading database with a minimum number of rows and then execute those quires 
+11. some programmers complain that testing is not part of those programming descriptions
+    - they need to grow up
+12. some programmers suggest that tdd is too hard
+    - would they want cheese with their wine?
+
+### Discipline and Professionalism
+### Double Entry Book keeping 
+software is a sensitive discipline bye that I mean that there are single bits with in a binary
+of an application that if set a  wrong way will crash the system hart
+ you can go to a bridge or over pass and start to remove bolts that bridge probably won't fall down write away, 
+but I can reach into an application and flip one little bit and crash it
 
