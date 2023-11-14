@@ -40,13 +40,310 @@ and python examples to make it more understandably
 
 **Few important notes about it:**
 
-1. It's derived from many years of experience & many Fastapi projects, both big & small.
+1. It's derived from many years of experience & many projects, both big & small.
 2. It's pragmatic. All things mentioned here are things tested in production.
 
 **SomeThing important that I forgot**
 
 
 ## 1.Clean Code
+for such ambition we need the right skill,and as developers we code,
+so let's sharpen those skills and start coding a better world together
+
+1.OH, NO!
+2.Angry face
+1.I MADE MASS OF THE CODE
+TRASH
+2.HOW WE CAN FIX THIS?!
+CHOAS
+ROBISH
+ROBERT C MARTIN INTRO
+TO IS ONE CLEAN CODING AND CLEAN ARCHITECTURE AND HWO CAN TEACH US BETTER THAN
+mr clean code aka uncle bob the one and only robert c martin
+
+founders of agile manifesto, software craftsman ship, solid, ...
+
+hi I am bob (no iam not XD I am aref), and by the way, 
+thanks to every body who brought me hear that awfully nice of you(tanks to an association team)
+
+How many of you are programmers
+I don't care if you are young or old or black or white or a man or woman,
+I don't care if you are a programmer you are part of my trial
+
+you and I share a passion for something,
+and we can communicate about it in a way that most of the people can't
+
+so lets talk about clean code
+[clean code book picture]
+today talk is clean code , (30min session) so we are able to cover a little bit of ground here
+[the only measurement of clean code meme wtf per second]
+how are gone make our code good enough to service a codereview 
+such that our pears are not tearing out their hair figure out what our code does
+why is this important
+
+### Craftsmanship
+[
+    - acknowledgment
+        . i can teach you a physics of bicycle
+    - work
+        . but learn to ride will take work
+]
+how many computers are in this room
+100 good answer 
+how many computers do you have on your body 
+I can start count by me / I have my iphone, how many processors are in here
+main-processor screen processor wifi processor and the gps processor, and bluetooth processor and...
+i am holding in my hand in the mount of computing executing power that exed the computing power of hole world in 1980
+which is very interesting and you know we all have one and what we do with it we play angry birds
+which if you think about it is very cool
+{
+    that 's more processor with me i have airpods how many processor i in this, at least tree
+    look around you how many computer are in the wall or ciling
+    (look around and show stuff)
+}
+how often do you interact with software 
+not you how often does your ground ma interact with software
+in our society today it is impossible to go 60 seconds with out interacting with software system 
+you cant talk on phone you cat watch tv you cant microwave , you can't wash the dishes or your close, 
+{
+    you cant drive, how many code in modern car, not a tesla just normal old modern car car : over 100 million
+    when you press break do you blive a cable from pedal to the disk
+    or do you realize there is a if statement
+    and who wrote those if statement
+    if statement that decide whether or not car stop when you push on the break
+    how many people died for faille in that statement
+    1000
+    you and i are killing people
+    most of us walk in into store and see foolish computer and type five line to print our name in a  loop
+    and when we saw it we screamed [really scream] yeeee that's what i want to do for the rest of my life
+    but now we are killing people
+}
+our society runs on software nothing happens in pour society with out software
+you cannot by anything , you cannot sell anything , you cant get insurance , you cant get money out of bank
+software runs everything
+and our society does not realize, just how dependent it is
+
+and who white that software ... We Do
+we rule the world
+
+other people think they rule the world, but they hand it to us, 
+we write the rules that run in machine that govern every thing
+
+the event that actually causes society to wake up is some poor programmers do one foolish thing and kill 10000 people in shop
+whey they point at us and ask how you let this happen, and if that answer is "my boss told us it should be done by monday
+then politicians will shame, and they will regulate us, they tell what language should use and what platform should we use, 
+what course we have to take and what book we have to read, what process we have to follow , what signature we have to get 
+and we become civil server
+
+I would like to avoide this , so how do you avoide it 
+you get there first by establishing the ethics of software development , 
+what is our ethic do we have sated set of ethics , do we have set of standards that all programmers follow
+do programmers oath to set of standards, we don't have that we don't have a profession because of that 
+because to have a professional you must have something that you profess,
+and we don't profess anything at the time , we have to come up with this, we have to learn to adopt a set of standards so when that politicians of 
+world point at us, and they will , and ask how you let this happen we can respond by saying 
+"look this was horrible accident, and we regret that, but it was not dude to happen, but it wasn't do to own negligence"
+and when politicians of the world decide to regulate us they know how to do it because they will simply take the rules that we 
+already invented , and bring them into law .
+this is what happened to doctors, what happened to lawyers , architect ...
+
+
+and so we start to think what our ethic is, what do we value.
+and one of those better is the clean code, 
+so let's talk about that ...
+
+
+### Bad Code
+
+[
+A Fragile premise?
+
+"Good code matters."
+Kent Beck
+]
+does any of you heard about kent beck
+do a little bit research on kent beck, he is one of the leaders in the field
+
+he wrote a book a long time age "implementation patterns"
+and in that book he said that the book was base on the fragile premise
+and fragile premis was a good code matter
+when i read that in his book i scrached and i tought why kent beck has said that was fragile premise
+it seems to me a rook solide promise, yes code code matters and matter for a good bunch of powerfull  resons
+
+so for exxample why are we so slow 
+### why are proggramers so slow 
+how hwo here has worked on green field project 
+a project where is no code
+how fast can you go , those few days. where there is no code
+and someone come to you and say can you get that feature done
+and you say 
+[yessss , puusususu, you start witing code pewwwww , code pures out every pecific of your body ]
+and you get thet feature working ,
+and every body say wow you get that working fast . it only toke you few days
+[yeee we are programmers]
+can you do it againe 
+[yes, pewwwwwwww]
+come backe to yoiur team later 
+can you get a fuature working for us
+[oh tricker probbably gone take six month]
+you use to do that in a copple of days
+[ye but you don't know, how messy this system has become, if we even touch oneline of code oh hell could break loss]
+why that happend
+
+this is what happend to software teams theyt start fast ,
+they start out with a beutifull design and they start out lovely
+and fast and they write features and every things working great
+but they make a mass, because they wanna go fast, and as they make a mass 
+and as the mass builds the team get slower and slower until they bottom out at they 1% of theire original productivity
+and what do you gone do about this , lets say you are manager right ,
+you got this team and this team is working on a software for a two years now
+and they cant get anything done, no feaure can't get done in less than few month and even than it's going to be late
+and it wont work , you know the real world for a manegers what you gone do
+ 
+you made promisses to people , you set planes out there there is people expecting featurs and team canot deliver those 
+features , what you gone do as a manager. waht would youir option be,
+you gotte go fast somehow , add more people , every one know yoiu go twice as fast if you double a crew
+and you are laghing , why you are laghing cuse you know this is none sense 
+you can't go faster bye doubling the staff. adding more people doesnot make you go faster 
+what does it do the moment you deside to add new people to team what happen
+it slows down, cuz the new people suck life out of old people 
+for month , now you are hoppong those new people usually get smart after a while and the productivity will rise
+but there is a onother refacts that kicks in who is training the new people 
+the people who made the mass in the first place , and in factthat is not old people that are training
+this is the old code that traine new people , the new people  trown at the fier and they have gotte make some sense out of 
+the system they read old code they say to them selfe , oh i see how thong are done around here ,
+they emulated ofcourse and just continio to make problem worse
+and the code gets messier and messier no matther how many people you add to the team and
+nothing you do can't make that productivity rise, 
+thats why programers are slow...
+
+slow because they make a mass, if they didin't make a mass they will be fast
+if yoiu could keep the code clean , it wouln't be a mass
+you could add new feature in reasonable amont of time 
+just as long as you could continio keep the code odered and clean
+
+### strategy
+we are are going to talk about nummber of strategy
+but i wanna to impress that point on you prety throuly 
+we go slow because we make masses, why make masses
+waht drive us to make mass the first place 
+the desier to go fast
+we make mass be cause we think i have to get done quickly , they ecpecting me get a lot of stuff
+done i gotte get it done.. oh worked
+
+    - how many of you done this?
+it's hard to get code to work, and you try to make it work and try things setting with your debugger and 
+steping into trial and error to make it work and then sundenly it works [don't any body breath]
+move care fully and check it in , that s wrong thing to do
+if fact that you got in working is that only hve to do job , once the codeworks 
+that's when you have to clean it 
+    
+    - no one writes clean code first time nobody
+
+just it's to hard to get the code work
+so one the code works, it will be a mass 
+
+how much do you invest in cleaning
+roughlly the same time took you to write it
+
+and thats the problem no body wants to put that efford in
+cause they think they are done once the code works
+you are done when its right 
+(first make it work, then make it right, then better, faster, efficent,..)
+
+and if you adobt that aditute , then the code will stay clean
+and you never go throw slow down
+[
+    - the only way to go fast is to go well
+]
+
+### what is clean code
+ who knows who this guy is?
+[
+    "
+        i like my code to be
+        elegant and efficent 
+        ...
+        clean code does one thing well
+    "
+    Bjarne stroustrup
+]
+ yarnes strustrip
+c++ he made a language cpp  
+and this one "thing", has been in software for 40 years or more people always writing about function should do one thing
+is a very very old idea , but what does one thing mean, it's linda like subjective meature
+what does it mean for a function to do one thing . i thing i know the answer to this and i will tell you little bit
+later, i have completly objective way to meature one thing
+and if you would hear to that objective way , transforms the structure of your code remarkably
+
+[
+    "
+        Clean Code is simple and direct.
+        clean codes read like a well written prose...
+    "   
+    Gready Booch
+] 
+ 
+the cheaf scientist at rational he wrote book in 1988 called objrdt orented software design
+gready booch was also first person that i belived to have the title cheef scientist ,
+i think he invented that. and ever since every body wanted to be cheef scintist
+
+        clean codes read like a well written prose...
+
+have you ever read code?
+that read like well written prose
+what is that mean well written prose
+i think i can show you what that means
+
+[
+    "
+        clean code always looklike it was written by someone who cares
+    "
+    Micheal Feaders
+]
+what a lovely statement
+tahts a good aditute
+when was the last time you read a module and your tought as you reading that module the authure cared about me
+the authur cared about every body who read code
+when was the last time you had that exprience
+the authur of this code cared about me
+
+and by the way bring the fastinating point 
+what is your job?
+you may think that your job is to get the code to work , that's not your job
+thats only haf of your job and that least imortant part half your job
+the more importante part of your job is that you must write code that other people can mentaine
+and use and make work, if you hand me code that works perfectly but i can't undrestand it
+then as soon as the requirments came that code is useless
+on the other hand if you give me a code that does not work but i undrestand it , 
+i can make it work
+it is much more imprtante that your pears to be able to undrestand a code than the computer can undrestand a code
+it is more importante to comminucate with your pears using a programming languegs that it is to comminucate the computer
+because if you do that well. somebody will make that work
+
+[
+    "
+        you know you are working on a clean code
+        when each routine you read turn out
+        to be pretty much what you expect
+    "
+    warn cunningham
+]
+
+when was the last time you read code and as you reding it , 
+it was pretty much what you expected
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## 2.Names
@@ -1234,3 +1531,439 @@ of an application that if set a  wrong way will crash the system hart
  you can go to a bridge or over pass and start to remove bolts that bridge probably won't fall down write away, 
 but I can reach into an application and flip one little bit and crash it
 
+### QA Should find Nothing
+
+### 100% code coverage
+probably you could not realisticly cover 100% of you code but that doesnt mean you should exept a less tahn goal
+the fact that you cant get obtaine it doesn't  mean you shouldn't push as harder to get possible through
+
+### Conclution
+1. code rots because we afride to clean it
+2. to geep a system clean we must aliminate the fear of change
+3. only a sweet of test that you trust with your life can eliminte that fear
+
+
+## 7.Architecture
+architecture is disciplin of laying down the fundation of an entier software system
+it is composed of higher level decision , decision that must made first,
+decision that must servive the life time of architecture,
+
+architecure is not just a foundation, it's hole anglada ,
+architechure include grand shape of system and tinyest low level design,
+it include the most abstract of moudle interface ande most concreate of method implementation,
+
+programers are all architectes in one form or other
+architecure don't code are not architecture at all
+
+waht architecure is and what architecture dose 
+the taht system take in order to meet the use case and inorder to stay flexable and maintainable
+
+mvc is low level user interface partitioning
+but is not a particulaly good high level application partitioning is desn't split a system in a right way
+jcobson parttioning boundry control entiti partitioning taht split the app;ication architeture more nicely
+and can be used with mvc to make a very good sysytem structure
+
+we studied the horor disis of freamwok bounding and we will find ways to tread and cure this frightfull courage
+
+### What is Architecture
+architecture is not about tools and building matterials , architecture is about usage 
+
+### Architecture expose usage
+the architecture of library o church screams at you that this is church or a library
+
+a good architecture whether it is a architecture aof building or the architecture of software
+it is all about how a system been usend , a good architecture scream the usecase
+when you  look at the software system and all you can see is the mvc structure of a web system
+then the architecture of that system is hiding it's use cases ans exposing the deliviry mechanism
+we don't wanna see the delivery mechanism we wanna see the use cases 
+1. we don't want the use cases coupled to the delivery.
+2. we want the seperation be so strong tha they can be deployed independently from each other
+3. we don't want the use case know anything about delivery mechanism 
+4. we want decission about the UI DB Framework Tools the Service layer be compleatly independet from usecase
+
+### Deferring Decisions
+decision about ui databases framework and service layers can and should be deferred 
+thats one of primary goal of good architecture .
+a good architecture know how to keep options open for as long as possible.
+a good architecture maximise the number of decision not made.
+
+### separation of value
+so what if the entier value of the system is actually in user interface.
+all the bussines value ,is really in the way the system is delivered in and not the way system does.
+simple crud system and reall business value is in how that crud is delivered
+
+should the architecture of UI heavy system should be about it's usecases  or should it be about UI
+that's a wrong question to ask
+the real question is sens the UI is so critical should it be coupled to the rest of application
+and the answer to that is clearly not
+if the UI is critical we dont want its architecture poluted by the concern of rest of application
+another way to look atthis is the separation of bussines value
+consider for a moment just the use-cases and the UI 
+let's say we seperated this two  in the in dependently deployable and independently developl component
+such that ui is a plugin to the use-case     UI -> use-case
+let's say the estimate for the use-cases is 50k$ but the estimate dot developing UI is 150k$
+
+now the bussines can compare this two values and ask it self a very intresting question
+why is the ui much more expensive and should that be the case 
+maybe the ui shouln't be more expensive than use-cases
+maybe there is lesss expnsive way to do ui
+now it's possible that bussines would look at those numbers and decide ui is so critical that they don't mind at all
+that it cost threee times what the use-case cost
+and the other hand they may lookat horor those numbers and quickly get back to more appropriate size ui
+the pointa is with out that seperation there is no way for thebussines to tell cost of ui or the cust of use cases
+have the appropreate ratioa 
+seperating usecae from ui alows the bussines to meture the cost of each ans hnd that cost to the coresponding bissines value
+and this is not limmited just to ui hole system component can be  isolated this way the database the web the frameworks
+
+### conlution
+
+### use-case
+if i showed the sofware architecture of an accountin system dilevered over the web 
+what is the first thing that would you know about that system???
+
+the fact that this is accounting system is a far more importent than the fact that this is a web system
+most we systems do exacly opposit of this they scream web at you
+
+is mvc the views in the controller are strongly we related the models are completly subservient to the controllers
+ant the views in the controller are so titly coupled to the models ,
+that they have termendes influence over the structure of those models.
+many developers miss takely belive that models are object that represent bussinet rules
+such athat system makes the web central orgonise system and regent bussiness rules to enoing details.
+it is the web that is the detail
+
+you should be able to easyli change the delivery mechanisem
+without changing the architecture of the system
+
+given the two version of sme system on delivered on web and one delivered over the consol app
+
+we describe how user inter act whit the system without using web related worlds 
+instesd we use word in concept that don't imply the delively mechanisem
+json called this interactor descriptions Use Case
+ivar jacobson idea was that the development of an application should be deriven by the delivery in dependent usecase
+in other words is the use-cases that form the central orgonising prensiples
+and the abstraction around which the system is build
+
+when you look at at the architecture of use case driven system you see the use cases not the delivery mecahnisem
+what use see is the intent if the system
+
+### Use Cases
+use case is  formal decription if how a user intereacts with a system in order to achive specefic goal
+
+for example goal is to create a order with in a order proccessing system
+
+CREATE ORDER
+Data:
+customer id
+customer contact info
+shipment destination
+shipment mechanism
+payment information
+
+Primary Course: 
+1. order clerk issues "Create Order" command with above data.
+2. system validates all data
+3. system creates order and determines order-id
+4. system delivers order-id to clark
+
+Exeption Course:
+1. system deliver error massage to the system
+USE CASE is essentially an algorithem for the interpration of input data and the genetation of output data
+this means that we can create an object that implements that usecase
+ofcurse there is a detaile that cause use cases more complex than this
+for example in this use case what would happend if the validation fails on one or more entred fields
+
+this senario is primary course use case because it shows you what happend if nothing goes wrong
+but what if something goes wrong that handles bye extention course
+ notis how this extatins are simple modification to the high level argorithem original use case
+it would be pretty simple to integrate this extentions into the object that it implement those use cases
+
+
+user story begins by the name of use case and they eventually evolved to use-case
+
+
+now look agine at the algorithem of the primary cource of thisuse-case once again
+it mentions others bussines objects like costomer and order , the algorithem define a use case , and clearly it has bussiness ruls on it
+but thise bussines ruls don't belong to a customer or oder bussines objects 
+
+so where those bussiness ruls belong to ...
+what king of objects should we putt them in
+and where that use case object fit in our system artichecture
+
+```
+                     ┌────────┐
+                     │Customer│
+                     └▲───────┘
+┌────────────┐        │
+│Create Order├────────┤
+└────────────┘        │
+                     ┌▼───────┐
+                     │ Order  ◄──┐
+                     └▲───────┘  │
+┌────────────┐        │          │
+│Add Item    ├────────┤          │
+└────────────┘        │          │
+                     ┌▼───────┐  │   ┌──────────┐
+                     │ Item   │  ├───┤Ship Order│
+                     └────────┘  │   └──────────┘
+                                 │
+                                 │
+                                 │
+                     ┌────────┐  │
+                     │Shipment◄──┘
+                     └────────┘
+```
+
+as we create more and more use cases we are going to discover more and more bussines objects and more and more use case algorithem
+
+this leave us with a problem
+how do we partiotion our system in such a way that this use cases became central organising perinciple
+
+
+### Partitioning
+the objects we are talking about is now are at higher level architectural level than model viw controller
+architectures like this have three fundamental kinds of objects
+bussines objects => Entities
+user interface objects => Bounderies
+use case objects => Iteractors - controlls
+
+entites are repository of Application independent bussines rules
+ the mothods on entities objects perform functions that are valid in any other applications that entite object can be used in
+
+for example consider a priduct object such an object would be usefull for film seytem or a order entry systemS and inventry management system
+or even an online catolog . in jacabson view methos of that product object should be used for to all those applications .
+that product object would have no methods we specefic to any of those applications. any application specific method would go into one of 
+intractor objects. 
+
+use cases are application specific business ruls
+user cases are also implemented by interactor therefore interactor object are also application specific. and that mean any application specirfic
+busisness rule blong inside an interactor object
+
+for example imagen the use cases for create order or order item these use case blong ordering entry sytem therfore
+the interactor object that implemnets those usecses are specific  to roder entry sysytem
+
+iteractor achive thire goles by application specific logic that cause the application ignostic logic with the entities
+for example create order entite invoce both costracractor and get id method of order entitiy
+
+clearly this two method are application agnostic ,it's interactor that know how call thos methods to achive the goal of usecase
+
+```
+┌────────────┐   ────►     ┌─────────┐
+│Create Order│  create     │  Order  │
+│ Interactor ├────────────►│  Entity │
+└────────────┘  get-id     └─────────┘
+                 ────►
+                 o id
+                  ◄───
+```
+
+one of the jobs of usecase is to accept input data from the user and deliver output data back to the users
+this is the job of thierd kinf of objects the boundry object
+boundry object isolate the usecase from the delivery mechanisem and provide a comminucation path between the two
+if you got a mvc or a consoul or a client all of that are of the far side of boundry the usecases on the other side knows knothing about it
+
+```
+                                System Architecture
+                     ┌────────────────────────────────────────────────┐
+                     │┼──────────────────────────────────────────────┼│
+┌───────────┐        ││                                              ││
+│┼─────────┼│        ││  ┌───────I─┐       ┌──────┐      ┌─────────┐ ││
+││         ││        ││  │         │◄──────┤      ├─────►│         │ ││
+││         │┼────────┼┼──► Boundry │       │  UC  │      │  Entity │ ││
+││         ││        ││  │         │  ┌────┤      ├───┐  │         │ ││
+││         ││        ││  └─────────┘  │    └──────┘   │  └─────────┘ ││
+││         ││        ││               │               │              ││
+││         ││        ││               │               │              ││
+││         ││        ││  ┌─────I───┐◄─┘    ┌──────┐   └─►┌─────────┐ ││
+││ Delivery││        ││  │         │       │      │      │         │ ││
+││ mech.   │┼────────┼┼─►│ Boundry ◄───────┤  UC  ├─────►│  Entity │ ││
+││         ││        ││  │         │       │      │      │         │ ││
+││         ││        ││  └─────────┘  ┌────┴──────┘  ▲──►└─────────┘ ││
+││         ││        ││               │              │               ││
+││         ││        ││               │              │               ││
+││         ││        ││  ┌───────I─┐  │    ┌──────┐  │   ┌─────────┐ ││
+││         ││        ││  │         │◄─┘    │      ├──┘   │         │ ││
+││         │┼────────┼┼──► Boundry │       │  UC  │      │  Entity │ ││
+││         ││        ││  │         │◄──────┤      ├─────►│         │ ││
+│┼─────────┼│        ││  └─────────┘       └──────┘      └─────────┘ ││
+└───────────┘        ││                                              ││
+                     │┼──────────────────────────────────────────────┼│
+                     └────────────────────────────────────────────────┘
+```
+the delivery mech gathers users data wraps it up into a nice need cononical form shipsit throw thw boundry to the inter actors
+then interactor invoce theire application specific rulls they go on manupi;ate the entities objects and then application agnosticbusines ruls
+finally they gather result togheter and wrapit up into anice neet cannonical form and ship it back to the boundry to the delivery mech.
+
+
+```
+               ┌───────────────┐◄──  ──── ───── ────┐
+      ┌── ────►│ Request Model │                    │
+      │        └─────────────┬─┴────── ────── ───┐  │
+      │                      │                   │
+┌─────┼─────┐        ┌┐      ▼                   │  │
+│┼────┼────┼│        ││  ┌───────I─┐             │  │            ┌─────────┐
+││    │    ││        ││  │         │                             │         │
+││         │┼────────┼┼─►│ Boundry ◄────────┐    │  │   ┌───────►│  Entity │
+││    │    ││        ││  │         │        │    │  │   │        │         │
+││    │    ││        ││  └─────────┘        │           │   ── ─►└─────────┘
+││    └─ ──┼┼─┐      ││                     │    │  │   │  ┼
+││         ││ │      ││                     │    ▼  │   │
+││         ││        ││                   ┌─┴───────┴───┴┐◄─     ┌─────────┐
+││ Delivery││ │      ││                   │              │       │         │
+││ mech.   ││ │      ││                   │  Interactor  ├──────►│  Entity │
+││         ││        ││                   │              │       │         │
+││         ││ │      ││                   └─┬────┬───┬──┬┴─◄─ ─► └─────────┘
+││         ││ │      ││                     │    │   │  │ ▲
+││     ┌─ ─┼┼─┘      ││                     │        │  │ │
+││     │   ││        ││  ┌───────I─┐        │    │   │  │  ── ──►┌─────────┐
+││   ──┼───┼┼────┐   ││  │         │        │    │      │        │         │
+││  │  │   │┼────┼───┼┼──► Boundry │◄───────┘        │  └───────►│  Entity │
+││  │  │   ││    │   ││  │         │             │   │           │         │
+│┼──┼──┼───┼│    │   ││  └─────────┘             │               └─────────┘
+└───┼──┼────┘        └┘     ▲                        │
+    │  │         │          │                    │   │
+    ▼  │       ┌─┴──────────┴───┐◄─ ─── ────── ──┘
+  ┌────┴─┐     │ Response Model │                    │
+  │ User │     └────────────────┴─── ────── ───── ───┘
+  └──────┘
+```
+
+and so the bussines rules both the app;ication and specific and application agnostic are strongly decoupled
+from the delivery mech in a case of web deliver system the hole web framework hangs of the side of application
+and thats the way it should be wheter your application should be 
+
+### Isolation
+to keep the delivery mech apandis strongly isolated from the rest of architecture we need to stricly control those source code dependencies
+so that they cross the boundri in just one direction
+
+URL ROUTING HTML infact mv architecture lives on the other side of boundry 
+
+now days it's navie that complex views can derive from simple business objects  
+most views infact use hole colabration of business objects, in fact most views are significint portion of usecase
+
+so now days a model from mvc framework draw it's data from colabration of entites and interactors that impliment the usecases 
+thta model maybe single object but it's not a business object 
+infact those models are sell more than simple data structurs that are passed back and forth acrose the boundry 
+
+```
+                   ┌┐                                          ┌─────────┐
+┌───────────┐      ││                                          │         │
+│           ├──────┼┼────┐                            ┌───────►│  Entity │
+│ Presenter │      ││    │                            │        │         │
+│           ├────┐ ││    │                            │        └─────────┘
+└─┬─────────┘    │ ││    │                            │
+  │              │ ││    │                            │
+  ▼              │ ││  ┌─▼─────I─┐      ┌─────────────┴┐       ┌─────────┐
+┌────────────┐   │ ││  │         │      │              │       │         │
+│            │   │ ││  │ Boundry │◄─────┤  Interactor  ├──────►│  Entity │
+│ View Model │   │ ││  │         │      │              │       │         │
+│            │   │ ││  └────────┬┘      └────┬────────┬┘       └─────────┘
+└────────────┘   │ ││           │            │        │
+  ▲              │ ││           │            │        │
+  │              │ ││           │            │        │        ┌─────────┐
+┌─┴────────┐     │ ││           ▼            ▼        │        │         │
+│          │     │ ││          ┌────────────────┐     └───────►│  Entity │
+│   View   │     └─┼┼─────────►│ Response Model │              │         │
+│          │       ││          └────────────────┘              └─────────┘
+└──────────┘       └┘
+```
+
+in the wb version of mvc the web server srecive a http request it runs this request throw it's routing mechanisem 
+inorder to select a controler the controller parses throw a http request extract the request data from it and puting it into a nice 
+simple little datat structure 
+
+that date structure is really simple it doesn't have any of dictionary or hash map that usually assosiated with web server and web frameworks
+all the web ralated date tokens and data identifier and formats have been removed if you look at it a nd isolation 
+you wouldn't be able to tell any part of it came from a web . it's just a pure and simple data structure 
+
+that data structure is the model of reques and ships a cross the boundry to interactore 
+the interactore orcasterate the magic of convertiong the model of the request into the model of the response 
+it imp;ement the usecase it cordinates the dance between all the entite objects it gathers toghthter all the resault data and place it into a 
+pure data structure the model of the response
+
+the interactor then passes the response model back throw the boundry to a presenter object in the delivery framework 
+that presenter object converts the data elements in the responce model to a format more suitable for the web 
+the final presentation data structure then hand it to the view with renders it in to the html
+
+```
+                                  ┌───────────────┐
+          ┌──────────────────────►│ Request Model │◄────┐
+          │                       └───────────────┘     │
+          │                            ▲                │
+          │         ┌┐                 │                │
+          │         ││                 │                │
+┌─────────┴──┐      ││     ┌───────I─┐ │                │
+│            │      ││     │         ├─┘                │
+│ Controller ├──────┼┼────►│ Boundry │                  │
+│            │      ││     │         ◄───────────┐      │
+└────────────┘      ││     └─────────┘           │      │
+                    ││                        ┌──┴──────┴────┐
+                    ││                        │              │
+                    ││                        │  Interactor  │
+                    ││                        │              │
+                    ││                        └───┬─────┬────┘
+ ┌───────────┐      ││     ┌───────I─┐            │     │
+ │           │      ││     │         │◄───────────┘     │
+ │ Presenter ├──────┼┼─────► Boundry │                  │
+ │           │      ││     │         ├─┐                │
+ └────────┬──┘      ││     └─────────┘ │                │
+          │         ││                 │                │
+          │         ││                 │                │
+          │         └┘                 ▼                │
+          │                        ┌────────────────┐   │
+          └───────────────────────►│ Response Model │◄──┘
+                                   └────────────────┘
+```
+
+notice the structure of boundry it compose of two seperate sets of interfaces
+the first set of interfaces is used by the controllers but implemented by the interactors it accespt the request model structures
+the second set of interface is used by the interactors but implemented by the presenter it accepts the response data model structures
+
+those interfaces are the boundry , they belong on the application side and they are part of appllication artichecture 
+delivery mechanisem dependes uppon them even implements them and no dependency should cross that boundry pointing 
+towards the delivery mechanisem
+
+entity dont know anything about framework
+and that means you can develop them and you can test them with out the web server running
+you can runn all of your test with out the web server running and that's because entity and interactors are playing old object 
+infact you could write a test all the interactor and entites long before you make a we desicion 
+you can get the hole application working before you deside on a web server
+
+### Database
+
+
+
+## 19.Advance Test Driven Development Part1
+by the first law we are not allowed to write any production code until we warit a first unit test
+that unit test up to be pretty simple somthing really degenarate like 
+an invalid input 
+so lest see what our invertor dose when pass a null
+
+### single assert rule
+that assertion is a one logical assertion not single physical assert
+lots of logical assertion are repesented by several call to assert
+```
+# n is even and greater than ten
+assert n%2 == 0
+assert n > 10
+```
+the foal of this rule is to kake sure when you write this test there is arange act and one logical assert
+we want assert act aseert not arrange act assert act assert act assert act assert
+
+Why?
+
+whe want to every action be tesated seperatelly 
+we don't want the input of one test id the aot put of previews test
+why ?
+test independent isolation
+
+### AAA rule
+Arrange
+act
+assert
+
+
+## 19.Advance Test Driven Development Part2
+
+***As the Test gets more specific, the Code gets mo Generic***
+
+## 20.Clean Test
