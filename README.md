@@ -58,10 +58,7 @@ TRASH
 CHOAS
 ROBISH
 ROBERT C MARTIN INTRO
-TO IS ONE CLEAN CODING AND CLEAN ARCHITECTURE AND HWO CAN TEACH US BETTER THAN
-mr clean code aka uncle bob the one and only robert c martin
 
-founders of agile manifesto, software craftsman ship, solid, ...
 
 hi I am bob (no iam not XD I am aref), and by the way, 
 thanks to every body who brought me hear that awfully nice of you(tanks to an association team)
@@ -330,15 +327,290 @@ because if you do that well. somebody will make that work
     warn cunningham
 ]
 
-when was the last time you read code and as you reding it , 
+when was the last time you read code, and as you read it, 
 it was pretty much what you expected
+you to read a line and going
+ye
+ye
+yep
+yes
+ahom
+ye
+
+what was the last time you had that experience 
+what he's saying is no wtf/perMin zero
+clean code being no surprising no wtf
+every is pretty mush what it is expected
+
+### clean code episod 2
+
+i ma going to put somecode on screen
+it would be 3 pages of code i will give you 1 min perpage
+so you get 2 min the codeis java 
+read the code figure out what it does and when you are done i will ask you what it does
+and we will begin now
+
+```python
+def check_permission(action: str, current_user: User, user_info: dict):
+    output = {'has_permission': True, 'exception': ""}
+    if user_info.get('permitted') is None:
+        if action == "add":
+            output['has_permission'] = False
+            output['exception'] = "permitted field is null!"
+            return output
+        elif action == "edit":
+            return output
+    if current_user.permitted:
+        if not user_info.get('permitted'):
+            output['has_permission'] = False
+            output['exception'] = "Can't give full access to the user"
+            return output
+        else:
+            for province in user_info['permitted']:
+                if province not in current_user.permitted:
+                    output['has_permission'] = False
+                    output['exception'] = f"Can't give '{province}' province access to the user"
+                    return output
+                if not user_info['permitted'][province]:
+                    if current_user.permitted[province]:
+                        output['has_permission'] = False
+                        output['exception'] = f"Can't give '{province}' province full access to the user"
+                        return output
+                else:
+                    if current_user.permitted[province]:
+                        # copy province for city
+                        for city in user_info['permitted'][province]:
+                            if city not in current_user.permitted[province]:
+                                output['has_permission'] = False
+                                output['exception'] = f"Can't give '{province}-{city}' city access to the user"
+                                return output
+                            if not user_info['permitted'][province][city]:
+                                if current_user.permitted[province][city]:
+                                    output['has_permission'] = False
+                                    output['exception'] = f"Can't give '{province}-{city}' city full access " \
+                                                          f"to the user"
+                                    return output
+                            else:
+                                if current_user.permitted[province][city]:
+                                    if not set(user_info['permitted'][province][city]).issubset(
+                                            set(current_user.permitted[province][city])
+                                    ):
+                                        output['has_permission'] = False
+                                        output['exception'] = "Can't give access to some nodes"
+                                        return output
+    if user_info.get('permitted'):
+        for province in user_info['permitted']:
+            for city in user_info['permitted'][province]:
+                if user_info['permitted'][province][city]:
+                    nodes = find_nodes_by_ids(user_info['permitted'][province][city])
+                    if len(user_info['permitted'][province][city]) != len(nodes):
+                        output['has_permission'] = False
+                        output['exception'] = "Some nodes didn't exist"
+                        return output
+                    for node in nodes:
+                        if node.province != province:
+                            output['has_permission'] = False
+                            output['exception'] = f"Some nodes are not related to '{province}' province"
+                            return output
+                        elif node.city != city:
+                            output['has_permission'] = False
+                            output['exception'] = f"Some nodes are not related to '{city}' city"
+                            return output
+    return output
 
 
+```
 
+- what does this fuction do?
+ye it return execption because the very last line
 
+- what is the function name
+permmisttion
+gode so we have first line and last line
 
+- what the middle do?
+[????]
+it's permmistion ckecking functon probebly it's gone raise and error if something was not supposed to happend
 
+- what was the name 
+[check permittion] trible name for a fuction
 
+it's none you don't want none for function name , function names should be verbs
+because function do things
+
+- let's look at the fuction inece more ther is a quite of bad thing going on on here
+
+### abstraction level
+we are going from highest level concept in the system to lowes level thing in a python this is Rude
+the proggrammers been rude, taking you from highs to the deeps on one line
+    there is rule for a function and that is every line of function , shold be at the same level of function
+    extraction and that level should be one level below the name
+
+[show the problem on code]
+
+[show something hard to understand and stuoid]
+is that important , you are programmers trying to undered this meaning on that
+we go from highst level of concept to the lowest , high to low high to low
+which is rude, not to you the auther but to the reader
+
+the mistake that author made , is that author got all this working and then didn't fix
+
+now i show you the inter mediet refactor , it's not final refactor
+
+```python
+
+class UserPermit:
+    def __init__(self, input_user: UserIn, current_user: User):
+        self.__input_user: UserIn = input_user
+        self.__current_user: User = current_user
+
+    def raise_if_can_not_give_access_to_nodes(self):
+        self.__raise_if_current_do_not_have_full_access_but_input_have()
+        self.__raise_if_current_do_not_have_a_province_but_input_have()
+        self.__raise_if_current_do_not_have_province_full_access_but_input_have()
+        self.__raise_if_current_do_not_have_a_city_access_but_input_have()
+        self.__raise_if_current_do_not_have_city_full_access_but_input_have()
+        self.__raise_if_current_do_not_have_a_node_access_but_input_have()
+
+    def __raise_if_current_do_not_have_full_access_but_input_have(self):
+        if self.__current_user.permitted:
+            if not self.__input_user.permitted:  # is_empty # input_user don't have it
+                raise BaseCustomException("Can't give full access to the user")
+
+    def __raise_if_current_do_not_have_a_province_but_input_have(self):
+        if self.__input_user.permitted:
+            for province in self.__input_user.permitted:
+                if __user_have_province(self.__input_user ,provence)province not in self.__current_user.permitted:  # input_user have a province but current_user don't
+                    raise BaseCustomException(f"Can't give '{province}' province access to the user")
+
+    def __raise_if_current_do_not_have_province_full_access_but_input_have(self):
+        for province in __user_provinces(self.__input_user):
+            if __current_user_have_province(province)
+             and not __input_user_have_province(province):
+                 raise BaseCustomException(f"Can't give '{province}' province full access to the user")
+
+    def __raise_if_current_do_not_have_a_city_access_but_input_have(self):
+        for province in self.__input_user.permitted:
+            for city in self.__input_user.permitted[province]:
+                if city not in self.__current_user.permitted[province]:
+                    raise BaseCustomException(f"Can't give '{province}-{city}' city access to the user")
+
+    def __raise_if_current_do_not_have_city_full_access_but_input_have(self):
+        for province in self.__input_user.permitted:
+            for city in self.__input_user.permitted[province]:
+                if self.__current_user.permitted[province][city]:
+                    raise BaseCustomException(f"Can't give '{province}-{city}' city full access to the user")
+
+    def __raise_if_current_do_not_have_a_node_access_but_input_have(self):
+        for city in self.__input_user.permitted[province]:
+            if not set(self.__input_user.permitted[province][city]).issubset(set(self.__current_user.permitted[province][city])):
+                raise BaseCustomException("Can't give access to some nodes")
+
+    def __user_have_province(user: User, province: str)
+        return user.permitted[province]
+```
+
+it's not hard to undrestand what this code is ding
+still some problems with it
+it's gotte better name, mabe it's not perfect
+resonable name , better structure
+
+- why it's better , what make it better, why is it easier to underestand
+it's smaller
+you don't need ant reason other thatn that
+
+take you no time to undrestand this function , this function is polite
+why is it polite , what do i mean by polite
+
+does any of you have read jernal or article
+a rule for writing a article or paper is very simple 
+you start with the title the head line 
+then you have a proggraph
+usually called the abstract
+ususally one prograph and it describe every thing in this paper,in high level terms
+and then the next prograph down, is slightly more detaile
+the paragraph after that a little bit more detile
+and as you read down thowards the detile and increses to get to the bottem where all the names and dates are
+
+this is poilte
+because of what it is allows the reader to do
+it allows the reader to scape early 
+what is your alghoritem for reading news , you scan the head line for interesting
+if headline is intersting i read the first paragraph
+if it's still intresting you read the second paragraph
+if it's istill intresting you read the thierd paragraph
+...
+notic the while loop here, and you exit that while loop as you get board
+no body read the hole articl you just read till you get boared out
+
+it is polite to allow the reader to leave earlly 
+and this allows you to exit early
+
+if you are guy and you saw call to a function
+and you say G i wonder what that function does
+
+and you went here with in three second
+and you know what this function does at a very high level not deteil
+and maybe you dont want any detail
+and you get out early 
+
+there wan no way to get out early frim this code [old version]
+the onlly way to undrestand it all is to undrestand it all completly
+including on the [null checks]
+and it would take you thirty minit
+thirty minin of pooring this code , wondring what the devil is this guy doing why is this doing this way , what is ...
+and the end of thierty minit you would say, ahhh that function to (raise error if user have no permissio for node)
+why the hell he didn't say that
+
+how do i get this code shrank down to last little bit, how that process work
+my goal was to make this function small 
+
+[
+    the first rule 
+        function should be small
+    
+    second rule 
+        they should be smaller than that
+]
+
+how small should afunction be
+what's proper size for a function
+how many line should it be
+fit on screan, old rule
+then the function should be 20 line 
+it that a right size
+i have better rule
+
+the function should do onething
+### do one thing
+now we have to define what one thiing is 
+    - what idea so you using
+    intelij
+    raise hand
+    it's best idea
+
+    if you are sry
+
+one of the way to do that is extract method
+
+a function mean one thing if you cannot meaning fully extract one thing out of it
+if a function contain a code and you can extract another function from it
+
+so i want all my function to do onething so i need to extract , extract , extract
+until i cannot extract any more
+
+eevery body in this room goone say this guy is not i not gone do that
+if i do that i have thousen of little tiny functions i would drawn and sink in the see of tiny little functiond
+no you will not draw in see of tiny little functions , and there is simple function
+you have to going to give name to thos e function you have to give them name
+
+and you have to move them to properly named classed and proproet named packages
+and propriet named source file, and modules
+and you will create a tree, if simantic functions that you can follow by name
+
+now you may not belive me but let me few points
+nut just the code just the shape of code++
+if 
 
 
 
