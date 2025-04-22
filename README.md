@@ -28,6 +28,7 @@
     * [The Three Laws of TDD](#the-three-laws-of-tdd)
     * [Red, Green, Refactor](#red-green-refactor)
     * [Objections](#objections)
+- [Architecture](#7architecture)
 ---
 
 ## What is this?
